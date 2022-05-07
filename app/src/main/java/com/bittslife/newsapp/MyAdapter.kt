@@ -1,12 +1,15 @@
 package com.bittslife.newsapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -26,6 +29,11 @@ class MyAdapter(val context: Context, val articles: List<Article>) :
         holder.itemView.setOnClickListener {
             Toast.makeText(context, article.title, Toast.LENGTH_SHORT).show()
         }
+        holder.llContainer.setOnClickListener {
+            val intent = Intent(context.applicationContext,WebViewActivity::class.java)
+            intent.putExtra("URL",article.url)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +44,7 @@ class MyAdapter(val context: Context, val articles: List<Article>) :
         val textviewTitle = itemView.findViewById<TextView>(R.id.textViewTitle)
         val textviewDescription = itemView.findViewById<TextView>(R.id.textViewDescription)
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
+        val llContainer = itemView.findViewById<LinearLayout>(R.id.llContainer)
     }
 
 }
